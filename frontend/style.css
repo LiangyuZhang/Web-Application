@@ -1,0 +1,263 @@
+.user-avatar {
+	height: 100px;
+	width: 100px;
+}
+
+.panel {
+	height:350px;
+	overflow:auto;
+}
+
+.follower {
+  position: fixed;
+  right: 7%;
+  display: inline-block;
+  border-style: ridge;
+}
+.sfollower{
+	border-style: ridge;
+}
+
+.hiddentext{
+	display:none;
+}
+table {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse;
+}
+table th {
+	background:#b5cfd2;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+table td {
+	background:#dcddc0;
+	border-width: 1px;
+	padding: 8px;
+	border-style: solid;
+	border-color: #999999;
+}
+
+input[type=submit], input[type=reset]{
+	box-shadow: 0px 1px 0px 0px #f0f7fa;
+	background-color:#33bdef;
+	border-radius:6px;
+	border:1px solid #057fd0;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 10px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #5b6178;
+}
+
+label {
+	color: #B4886B;
+	font-weight: bold;
+	display: block;
+	float: left;
+}
+
+ input[type=email], input[type=password] {
+	border: 2px solid white; 
+    background: rgba(255,255,255);
+}
+
+.card {	
+	margin: 0 auto;
+	width: 50%;
+	padding-bottom: 22px;
+	margin-bottom: 1.5pt;
+	padding: 3pt;
+	border: 1pt solid grey;	
+	border-radius: 10px;
+	min-height: 3.5em;	
+	background-color: white;
+}
+
+span {
+	color: #014181;	
+	font-weight: bold;
+	font-style: italic;
+	font-size: 1em;
+}
+
+/*
+css for the profile page
+*/
+
+.profilebody {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/*
+css for the main page
+*/
+.loginheader{
+	position: absolute;
+	top:30px;
+	border-bottom-style:solid;
+}
+.navigator{
+	background-color: grey;
+}
+.mainbody {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+.row.content {height: 1500px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;} 
+    }
+
+
+.alert {
+  visibility: hidden;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.landing-post {
+  position: relative;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.sample-post {
+  width: 600px;
+}
+
+.avatar-container {
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+}
+
+.feeder-info {
+  margin-top: 5px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+.feed-name {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.feed-timestamp {
+  margin-left: 10px;
+  font-size: 14px;
+  color: rgb(133, 133, 133);
+}
+
+.feed-content {
+  margin-left: 10px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.feed-image-container {
+  margin-left: 10px;
+}
+
+.feed-replies {
+  background-color: #f6f7f8;
+  position: relative;
+  display: block;
+  margin: 0;
+  border-top: 1px solid #e9eaed;
+}
+
+.replycontainer {
+  display: inline-block;
+  margin-top: 3px;
+}
+
+.reply-info {
+  font-size: 13px;
+}
+
+.reply-avatar {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 30px;
+  width: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.time {
+  color: rgb(133, 133, 133);
+}
+
+.text {
+  font-size: 12px;
+}
+
+.alert-style-addon {
+  margin-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.searchbox{
+    text-align:center;
+    height: 43px;
+}
+.navbar-fixed-top{
+	 height: 30px;
+}
+.feed-img{
+  width: 312px;
+  height: 343px;
+
+}
+
+
+
+
+
+

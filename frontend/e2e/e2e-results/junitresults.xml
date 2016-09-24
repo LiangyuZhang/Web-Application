@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+ <testsuite name="App" timestamp="2016-03-23T20:42:28" hostname="localhost" time="24.548" errors="0" tests="11" skipped="0" disabled="0" failures="0">
+  <testcase classname="App" name="should register new user" time="2.797" />
+  <testcase classname="App" name="should log in as a test user" time="2.099" />
+  <testcase classname="App" name="Create a new post and validate the post appears in feed" time="1.64" />
+  <testcase classname="App" name="Update status headline and verify change" time="1.742" />
+  <testcase classname="App" name="Add the Follower user and verify count increases by one" time="1.897" />
+  <testcase classname="App" name="Remove the Follower user and verify count decrease by one" time="2.472" />
+  <testcase classname="App" name="search for post and verify only one post shows, and verify the author" time="1.575" />
+  <testcase classname="App" name="should navigate to the profile view and verify the page is loaded" time="1.7" />
+  <testcase classname="App" name="Update user email and verify" time="2.969" />
+  <testcase classname="App" name="Update user zipcode and verify" time="2.838" />
+  <testcase classname="App" name="Update user password and verify" time="2.813" />
+ </testsuite>
+</testsuites>

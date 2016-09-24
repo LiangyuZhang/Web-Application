@@ -1,0 +1,2498 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for services/jasmine-jquery.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">services/</a> jasmine-jquery.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">23.84% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>77/323</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">3.73% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>5/134</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5.56% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>8/144</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.37% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>77/316</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function (root, factory) {
+     <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof module !== 'undefined' &amp;&amp; module.exports) {
+<span class="cstat-no" title="statement not covered" >        factory(root, root.jasmine, require('jquery'));</span>
+    } else {
+        factory(root, root.jasmine, root.jQuery);
+    }
+}((function() {return this; })(), function (window, jasmine, $) { "use strict";
+&nbsp;
+  jasmine.spiedEventsKey = <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >    return [$(selector).selector, eventName].toString()</span>
+  }
+&nbsp;
+  jasmine.getFixtures = function () {
+    return jasmine.currentFixtures_ = jasmine.currentFixtures_ || new jasmine.Fixtures()
+  }
+&nbsp;
+  jasmine.getStyleFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.currentStyleFixtures_ = jasmine.currentStyleFixtures_ || new jasmine.StyleFixtures()</span>
+  }
+&nbsp;
+  jasmine.Fixtures = function () {
+    this.containerId = 'jasmine-fixtures'
+    this.fixturesCache_ = {}
+    this.fixturesPath = 'spec/javascripts/fixtures'
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.set = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    this.cleanUp()</span>
+<span class="cstat-no" title="statement not covered" >    return this.createContainer_(html)</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.appendSet= <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    this.addToContainer_(html)</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.preload = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.read.apply(this, arguments)</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.load = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.cleanUp()</span>
+<span class="cstat-no" title="statement not covered" >    this.createContainer_(this.read.apply(this, arguments))</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.appendLoad = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.addToContainer_(this.read.apply(this, arguments))</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.read = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    var htmlChunks = []</span>
+      , fixtureUrls = arguments
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for(var urlCount = fixtureUrls.length, urlIndex = 0; urlIndex &lt; urlCount; urlIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >      htmlChunks.push(this.getFixtureHtml_(fixtureUrls[urlIndex]))</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return htmlChunks.join('')</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.clearCache = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesCache_ = {}</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.cleanUp = function () {
+    $('#' + this.containerId).remove()
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.sandbox = <span class="fstat-no" title="function not covered" >function (attributes) {</span>
+<span class="cstat-no" title="statement not covered" >    var attributesToSet = attributes || {}</span>
+<span class="cstat-no" title="statement not covered" >    return $('&lt;div id="sandbox" /&gt;').attr(attributesToSet)</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.createContainer_ = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    var container = $('&lt;div&gt;')</span>
+    .attr('id', this.containerId)
+    .html(html)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $(document.body).append(container)</span>
+<span class="cstat-no" title="statement not covered" >    return container</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.addToContainer_ = <span class="fstat-no" title="function not covered" >function (html){</span>
+<span class="cstat-no" title="statement not covered" >    var container = $(document.body).find('#'+this.containerId).append(html)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!container.length) {</span>
+<span class="cstat-no" title="statement not covered" >      this.createContainer_(html)</span>
+    }
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.getFixtureHtml_ = <span class="fstat-no" title="function not covered" >function (url) {</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof this.fixturesCache_[url] === 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >      this.loadFixtureIntoCache_(url)</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return this.fixturesCache_[url]</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.loadFixtureIntoCache_ = <span class="fstat-no" title="function not covered" >function (relativeUrl) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this</span>
+      , url = this.makeFixtureUrl_(relativeUrl)
+      , htmlText = ''
+      , request = $.ajax({
+        async: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
+        cache: false,
+        url: url,
+        dataType: 'html',
+        success: <span class="fstat-no" title="function not covered" >function (data, status, $xhr) {</span>
+<span class="cstat-no" title="statement not covered" >          htmlText = $xhr.responseText</span>
+        }
+      }).fail(<span class="fstat-no" title="function not covered" >function ($xhr, status, err) {</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('Fixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + err.message + ')')</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var scripts = $($.parseHTML(htmlText, true)).find('script[src]') || [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      scripts.each(<span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        $.ajax({</span>
+            async: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
+            cache: false,
+            dataType: 'script',
+            url: $(this).attr('src'),
+            success: <span class="fstat-no" title="function not covered" >function (data, status, $xhr) {</span>
+<span class="cstat-no" title="statement not covered" >                htmlText += '&lt;script&gt;' + $xhr.responseText + '&lt;/script&gt;'</span>
+            },
+            error: <span class="fstat-no" title="function not covered" >function ($xhr, status, err) {</span>
+<span class="cstat-no" title="statement not covered" >                throw new Error('Script could not be loaded: ' + url + ' (status: ' + status + ', message: ' + err.message + ')')</span>
+            }
+        });
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      self.fixturesCache_[relativeUrl] = htmlText;</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.makeFixtureUrl_ = <span class="fstat-no" title="function not covered" >function (relativeUrl){</span>
+<span class="cstat-no" title="statement not covered" >    return this.fixturesPath.match('/$') ? this.fixturesPath + relativeUrl : this.fixturesPath + '/' + relativeUrl</span>
+  }
+&nbsp;
+  jasmine.Fixtures.prototype.proxyCallTo_ = <span class="fstat-no" title="function not covered" >function (methodName, passedArguments) {</span>
+<span class="cstat-no" title="statement not covered" >    return this[methodName].apply(this, passedArguments)</span>
+  }
+&nbsp;
+&nbsp;
+  jasmine.StyleFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesCache_ = {}</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesNodes_ = []</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesPath = 'spec/javascripts/fixtures'</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.set = <span class="fstat-no" title="function not covered" >function (css) {</span>
+<span class="cstat-no" title="statement not covered" >    this.cleanUp()</span>
+<span class="cstat-no" title="statement not covered" >    this.createStyle_(css)</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.appendSet = <span class="fstat-no" title="function not covered" >function (css) {</span>
+<span class="cstat-no" title="statement not covered" >    this.createStyle_(css)</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.preload = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.read_.apply(this, arguments)</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.load = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.cleanUp()</span>
+<span class="cstat-no" title="statement not covered" >    this.createStyle_(this.read_.apply(this, arguments))</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.appendLoad = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.createStyle_(this.read_.apply(this, arguments))</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.cleanUp = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    while(this.fixturesNodes_.length) {</span>
+<span class="cstat-no" title="statement not covered" >      this.fixturesNodes_.pop().remove()</span>
+    }
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.createStyle_ = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    var styleText = $('&lt;div&gt;&lt;/div&gt;').html(html).text()</span>
+      , style = $('&lt;style&gt;' + styleText + '&lt;/style&gt;')
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.fixturesNodes_.push(style)</span>
+<span class="cstat-no" title="statement not covered" >    $('head').append(style)</span>
+  }
+&nbsp;
+  jasmine.StyleFixtures.prototype.clearCache = jasmine.Fixtures.prototype.clearCache
+  jasmine.StyleFixtures.prototype.read_ = jasmine.Fixtures.prototype.read
+  jasmine.StyleFixtures.prototype.getFixtureHtml_ = jasmine.Fixtures.prototype.getFixtureHtml_
+  jasmine.StyleFixtures.prototype.loadFixtureIntoCache_ = jasmine.Fixtures.prototype.loadFixtureIntoCache_
+  jasmine.StyleFixtures.prototype.makeFixtureUrl_ = jasmine.Fixtures.prototype.makeFixtureUrl_
+  jasmine.StyleFixtures.prototype.proxyCallTo_ = jasmine.Fixtures.prototype.proxyCallTo_
+&nbsp;
+  jasmine.getJSONFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.currentJSONFixtures_ = jasmine.currentJSONFixtures_ || new jasmine.JSONFixtures()</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesCache_ = {}</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesPath = 'spec/javascripts/fixtures/json'</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.load = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.read.apply(this, arguments)</span>
+<span class="cstat-no" title="statement not covered" >    return this.fixturesCache_</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.read = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    var fixtureUrls = arguments</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for(var urlCount = fixtureUrls.length, urlIndex = 0; urlIndex &lt; urlCount; urlIndex++) {</span>
+<span class="cstat-no" title="statement not covered" >      this.getFixtureData_(fixtureUrls[urlIndex])</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return this.fixturesCache_</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.clearCache = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.fixturesCache_ = {}</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.getFixtureData_ = <span class="fstat-no" title="function not covered" >function (url) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!this.fixturesCache_[url]) <span class="cstat-no" title="statement not covered" >this.loadFixtureIntoCache_(url)</span></span>
+<span class="cstat-no" title="statement not covered" >    return this.fixturesCache_[url]</span>
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.loadFixtureIntoCache_ = <span class="fstat-no" title="function not covered" >function (relativeUrl) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this</span>
+      , url = this.fixturesPath.match('/$') ? this.fixturesPath + relativeUrl : this.fixturesPath + '/' + relativeUrl
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    $.ajax({</span>
+      async: false, // must be synchronous to guarantee that no tests are run before fixture is loaded
+      cache: false,
+      dataType: 'json',
+      url: url,
+      success: <span class="fstat-no" title="function not covered" >function (data) {</span>
+<span class="cstat-no" title="statement not covered" >        self.fixturesCache_[relativeUrl] = data</span>
+      },
+      error: <span class="fstat-no" title="function not covered" >function ($xhr, status, err) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new Error('JSONFixture could not be loaded: ' + url + ' (status: ' + status + ', message: ' + err.message + ')')</span>
+      }
+    })
+  }
+&nbsp;
+  jasmine.JSONFixtures.prototype.proxyCallTo_ = <span class="fstat-no" title="function not covered" >function (methodName, passedArguments) {</span>
+<span class="cstat-no" title="statement not covered" >    return this[methodName].apply(this, passedArguments)</span>
+  }
+&nbsp;
+  jasmine.jQuery = <span class="fstat-no" title="function not covered" >function () {</span>}
+&nbsp;
+  jasmine.jQuery.browserTagCaseIndependentHtml = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    return $('&lt;div/&gt;').append(html).html()</span>
+  }
+&nbsp;
+  jasmine.jQuery.elementToString = <span class="fstat-no" title="function not covered" >function (element) {</span>
+<span class="cstat-no" title="statement not covered" >    return $(element).map(<span class="fstat-no" title="function not covered" >function () {</span> <span class="cstat-no" title="statement not covered" >return this.outerHTML; </span>}).toArray().join(', ')</span>
+  }
+&nbsp;
+  var data = {
+      spiedEvents: {}
+    , handlers:    []
+  }
+&nbsp;
+  jasmine.jQuery.events = {
+    spyOn: <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >      var handler = <span class="fstat-no" title="function not covered" >function (e) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var calls = (typeof data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)] !== 'undefined') ? data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)].calls : 0</span>
+<span class="cstat-no" title="statement not covered" >        data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)] = {</span>
+          args: jasmine.util.argsToArray(arguments),
+          calls: ++calls
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      $(selector).on(eventName, handler)</span>
+<span class="cstat-no" title="statement not covered" >      data.handlers.push(handler)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return {</span>
+        selector: selector,
+        eventName: eventName,
+        handler: handler,
+        reset: <span class="fstat-no" title="function not covered" >function (){</span>
+<span class="cstat-no" title="statement not covered" >          delete data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)]</span>
+        },
+        calls: {
+          count: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >              return data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)] ?</span>
+                data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)].calls : 0;
+          },
+          any: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >              return data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)] ?</span>
+                !!data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)].calls : false;
+          }
+        }
+      }
+    },
+&nbsp;
+    args: <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >      var actualArgs = data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)].args</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (!actualArgs) {</span>
+<span class="cstat-no" title="statement not covered" >        throw "There is no spy for " + eventName + " on " + selector.toString() + ". Make sure to create a spy using spyOnEvent."</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return actualArgs</span>
+    },
+&nbsp;
+    wasTriggered: <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >      return !!(data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)])</span>
+    },
+&nbsp;
+    wasTriggeredWith: <span class="fstat-no" title="function not covered" >function (selector, eventName, expectedArgs, util, customEqualityTesters) {</span>
+<span class="cstat-no" title="statement not covered" >      var actualArgs = jasmine.jQuery.events.args(selector, eventName).slice(1)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (Object.prototype.toString.call(expectedArgs) !== '[object Array]')</span>
+<span class="cstat-no" title="statement not covered" >        actualArgs = actualArgs[0]</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return util.equals(actualArgs, expectedArgs, customEqualityTesters)</span>
+    },
+&nbsp;
+    wasPrevented: <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >      var spiedEvent = data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)]</span>
+        , args = (jasmine.util.isUndefined(spiedEvent)) ? {} : spiedEvent.args
+        , e = args ? args[0] : undefined
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return e &amp;&amp; e.isDefaultPrevented()</span>
+    },
+&nbsp;
+    wasStopped: <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >      var spiedEvent = data.spiedEvents[jasmine.spiedEventsKey(selector, eventName)]</span>
+        , args = (jasmine.util.isUndefined(spiedEvent)) ? {} : spiedEvent.args
+        , e = args ? args[0] : undefined
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return e &amp;&amp; e.isPropagationStopped()</span>
+    },
+&nbsp;
+    cleanUp: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >      data.spiedEvents = {}</span>
+<span class="cstat-no" title="statement not covered" >      data.handlers    = []</span>
+    }
+  }
+&nbsp;
+  var hasProperty = <span class="fstat-no" title="function not covered" >function (actualValue, expectedValue) {</span>
+<span class="cstat-no" title="statement not covered" >    if (expectedValue === undefined)</span>
+<span class="cstat-no" title="statement not covered" >      return actualValue !== undefined</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return actualValue === expectedValue</span>
+  }
+&nbsp;
+  beforeEach(function () {
+    jasmine.addMatchers({
+      toHaveClass: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, className) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).hasClass(className) }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveCss: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, css) {</span>
+<span class="cstat-no" title="statement not covered" >            var stripCharsRegex = /[\s;\"\']/g</span>
+<span class="cstat-no" title="statement not covered" >            for (var prop in css) {</span>
+<span class="cstat-no" title="statement not covered" >              var value = css[prop]</span>
+              // see issue #147 on gh
+              ;<span class="cstat-no" title="statement not covered" >if ((value === 'auto') &amp;&amp; ($(actual).get(0).style[prop] === 'auto')) <span class="cstat-no" title="statement not covered" >continue</span></span>
+<span class="cstat-no" title="statement not covered" >              var actualStripped = $(actual).css(prop).replace(stripCharsRegex, '')</span>
+<span class="cstat-no" title="statement not covered" >              var valueStripped = value.replace(stripCharsRegex, '')</span>
+<span class="cstat-no" title="statement not covered" >              if (actualStripped !== valueStripped) <span class="cstat-no" title="statement not covered" >return { pass: false }</span></span>
+            }
+<span class="cstat-no" title="statement not covered" >            return { pass: true }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeVisible: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':visible') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeHidden: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':hidden') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeSelected: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':selected') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeChecked: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':checked') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeEmpty: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':empty') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeInDOM: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $.contains(document.documentElement, $(actual)[0]) }</span>
+          }
+        }
+      },
+&nbsp;
+      toExist: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).length }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveLength: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, length) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).length === length }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveAttr: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, attributeName, expectedAttributeValue) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: hasProperty($(actual).attr(attributeName), expectedAttributeValue) }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveProp: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, propertyName, expectedPropertyValue) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: hasProperty($(actual).prop(propertyName), expectedPropertyValue) }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveId: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, id) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).attr('id') == id }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveHtml: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, html) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).html() == jasmine.jQuery.browserTagCaseIndependentHtml(html) }</span>
+          }
+        }
+      },
+&nbsp;
+      toContainHtml: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, html) {</span>
+<span class="cstat-no" title="statement not covered" >            var actualHtml = $(actual).html()</span>
+              , expectedHtml = jasmine.jQuery.browserTagCaseIndependentHtml(html)
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return { pass: (actualHtml.indexOf(expectedHtml) &gt;= 0) }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveText: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, text) {</span>
+<span class="cstat-no" title="statement not covered" >            var actualText = $(actual).text()</span>
+<span class="cstat-no" title="statement not covered" >            var trimmedText = $.trim(actualText)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (text &amp;&amp; $.isFunction(text.test)) {</span>
+<span class="cstat-no" title="statement not covered" >              return { pass: text.test(actualText) || text.test(trimmedText) }</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              return { pass: (actualText == text || trimmedText == text) }</span>
+            }
+          }
+        }
+      },
+&nbsp;
+      toContainText: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, text) {</span>
+<span class="cstat-no" title="statement not covered" >            var trimmedText = $.trim($(actual).text())</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (text &amp;&amp; $.isFunction(text.test)) {</span>
+<span class="cstat-no" title="statement not covered" >              return { pass: text.test(trimmedText) }</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              return { pass: trimmedText.indexOf(text) != -1 }</span>
+            }
+          }
+        }
+      },
+&nbsp;
+      toHaveValue: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, value) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).val() === value }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveData: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, key, expectedValue) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: hasProperty($(actual).data(key), expectedValue) }</span>
+          }
+        }
+      },
+&nbsp;
+      toContainElement: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).find(selector).length }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeMatchedBy: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).filter(selector).length }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeDisabled: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual).is(':disabled') }</span>
+          }
+        }
+      },
+&nbsp;
+      toBeFocused: <span class="fstat-no" title="function not covered" >function (selector) {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            return { pass: $(actual)[0] === $(actual)[0].ownerDocument.activeElement }</span>
+          }
+        }
+      },
+&nbsp;
+      toHandle: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, event) {</span>
+<span class="cstat-no" title="statement not covered" >            if ( !actual || actual.length === 0 ) <span class="cstat-no" title="statement not covered" >return { pass: false };</span></span>
+<span class="cstat-no" title="statement not covered" >            var events = $._data($(actual).get(0), "events")</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!events || !event || typeof event !== "string") {</span>
+<span class="cstat-no" title="statement not covered" >              return { pass: false }</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var namespaces = event.split(".")</span>
+              , eventType = namespaces.shift()
+              , sortedNamespaces = namespaces.slice(0).sort()
+              , namespaceRegExp = new RegExp("(^|\\.)" + sortedNamespaces.join("\\.(?:.*\\.)?") + "(\\.|$)")
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (events[eventType] &amp;&amp; namespaces.length) {</span>
+<span class="cstat-no" title="statement not covered" >              for (var i = 0; i &lt; events[eventType].length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                var namespace = events[eventType][i].namespace</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (namespaceRegExp.test(namespace))</span>
+<span class="cstat-no" title="statement not covered" >                  return { pass: true }</span>
+              }
+            } else {
+<span class="cstat-no" title="statement not covered" >              return { pass: (events[eventType] &amp;&amp; events[eventType].length &gt; 0) }</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return { pass: false }</span>
+          }
+        }
+      },
+&nbsp;
+      toHandleWith: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, eventName, eventHandler) {</span>
+<span class="cstat-no" title="statement not covered" >            if ( !actual || actual.length === 0 ) <span class="cstat-no" title="statement not covered" >return { pass: false };</span></span>
+<span class="cstat-no" title="statement not covered" >            var normalizedEventName = eventName.split('.')[0]</span>
+              , stack = $._data($(actual).get(0), "events")[normalizedEventName]
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; stack.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >              if (stack[i].handler == eventHandler) <span class="cstat-no" title="statement not covered" >return { pass: true }</span></span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return { pass: false }</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenTriggeredOn: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            var result = { pass: jasmine.jQuery.events.wasTriggered(selector, actual) }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+              "Expected event " + $(actual) + " not to have been triggered on " + selector :
+              "Expected event " + $(actual) + " to have been triggered on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result;</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenTriggered: <span class="fstat-no" title="function not covered" >function (){</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            var eventName = actual.eventName</span>
+              , selector = actual.selector
+              , result = { pass: jasmine.jQuery.events.wasTriggered(selector, eventName) }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+            "Expected event " + eventName + " not to have been triggered on " + selector :
+              "Expected event " + eventName + " to have been triggered on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenTriggeredOnAndWith: <span class="fstat-no" title="function not covered" >function (j$, customEqualityTesters) {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector, expectedArgs) {</span>
+<span class="cstat-no" title="statement not covered" >            var wasTriggered = jasmine.jQuery.events.wasTriggered(selector, actual)</span>
+              , result = { pass: wasTriggered &amp;&amp; jasmine.jQuery.events.wasTriggeredWith(selector, actual, expectedArgs, j$, customEqualityTesters) }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >              if (wasTriggered) {</span>
+<span class="cstat-no" title="statement not covered" >                var actualArgs = jasmine.jQuery.events.args(selector, actual, expectedArgs)[1]</span>
+<span class="cstat-no" title="statement not covered" >                result.message = result.pass ?</span>
+                  "Expected event " + actual + " not to have been triggered with " + jasmine.pp(expectedArgs) + " but it was triggered with " + jasmine.pp(actualArgs) :
+                  "Expected event " + actual + " to have been triggered with " + jasmine.pp(expectedArgs) + "  but it was triggered with " + jasmine.pp(actualArgs)
+&nbsp;
+              } else {
+                // todo check on this
+<span class="cstat-no" title="statement not covered" >                result.message = result.pass ?</span>
+                  "Expected event " + actual + " not to have been triggered on " + selector :
+                  "Expected event " + actual + " to have been triggered on " + selector
+              }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >              return result</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenPreventedOn: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            var result = { pass: jasmine.jQuery.events.wasPrevented(selector, actual) }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+              "Expected event " + actual + " not to have been prevented on " + selector :
+              "Expected event " + actual + " to have been prevented on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenPrevented: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            var eventName = actual.eventName</span>
+              , selector = actual.selector
+              , result = { pass: jasmine.jQuery.events.wasPrevented(selector, eventName) }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+              "Expected event " + eventName + " not to have been prevented on " + selector :
+              "Expected event " + eventName + " to have been prevented on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenStoppedOn: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual, selector) {</span>
+<span class="cstat-no" title="statement not covered" >            var result = { pass: jasmine.jQuery.events.wasStopped(selector, actual) }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+              "Expected event " + actual + " not to have been stopped on " + selector :
+              "Expected event " + actual + " to have been stopped on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result;</span>
+          }
+        }
+      },
+&nbsp;
+      toHaveBeenStopped: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >        return {</span>
+          compare: <span class="fstat-no" title="function not covered" >function (actual) {</span>
+<span class="cstat-no" title="statement not covered" >            var eventName = actual.eventName</span>
+              , selector = actual.selector
+              , result = { pass: jasmine.jQuery.events.wasStopped(selector, eventName) }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            result.message = result.pass ?</span>
+              "Expected event " + eventName + " not to have been stopped on " + selector :
+              "Expected event " + eventName + " to have been stopped on " + selector
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return result</span>
+          }
+        }
+      }
+    })
+&nbsp;
+    jasmine.getEnv().addCustomEqualityTester(<span class="fstat-no" title="function not covered" >function(a, b) {</span>
+<span class="cstat-no" title="statement not covered" >     if (a &amp;&amp; b) {</span>
+<span class="cstat-no" title="statement not covered" >       if (a instanceof $ || jasmine.isDomNode(a)) {</span>
+<span class="cstat-no" title="statement not covered" >         var $a = $(a)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >         if (b instanceof $)</span>
+<span class="cstat-no" title="statement not covered" >           return $a.length == b.length &amp;&amp; a.is(b)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >         return $a.is(b);</span>
+       }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >       if (b instanceof $ || jasmine.isDomNode(b)) {</span>
+<span class="cstat-no" title="statement not covered" >         var $b = $(b)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >         if (a instanceof $)</span>
+<span class="cstat-no" title="statement not covered" >           return a.length == $b.length &amp;&amp; $b.is(a)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >         return $(b).is(a);</span>
+       }
+     }
+    })
+&nbsp;
+    jasmine.getEnv().addCustomEqualityTester(<span class="fstat-no" title="function not covered" >function (a, b) {</span>
+<span class="cstat-no" title="statement not covered" >     if (a instanceof $ &amp;&amp; b instanceof $ &amp;&amp; a.size() == b.size())</span>
+<span class="cstat-no" title="statement not covered" >        return a.is(b)</span>
+    })
+  })
+&nbsp;
+  afterEach(function () {
+    jasmine.getFixtures().cleanUp()
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().cleanUp()</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.jQuery.events.cleanUp()</span>
+  })
+&nbsp;
+  window.readFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.getFixtures().proxyCallTo_('read', arguments)</span>
+  }
+&nbsp;
+  window.preloadFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getFixtures().proxyCallTo_('preload', arguments)</span>
+  }
+&nbsp;
+  window.loadFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getFixtures().proxyCallTo_('load', arguments)</span>
+  }
+&nbsp;
+  window.appendLoadFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getFixtures().proxyCallTo_('appendLoad', arguments)</span>
+  }
+&nbsp;
+  window.setFixtures = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.getFixtures().proxyCallTo_('set', arguments)</span>
+  }
+&nbsp;
+  window.appendSetFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getFixtures().proxyCallTo_('appendSet', arguments)</span>
+  }
+&nbsp;
+  window.sandbox = <span class="fstat-no" title="function not covered" >function (attributes) {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.getFixtures().sandbox(attributes)</span>
+  }
+&nbsp;
+  window.spyOnEvent = <span class="fstat-no" title="function not covered" >function (selector, eventName) {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.jQuery.events.spyOn(selector, eventName)</span>
+  }
+&nbsp;
+  window.preloadStyleFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().proxyCallTo_('preload', arguments)</span>
+  }
+&nbsp;
+  window.loadStyleFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().proxyCallTo_('load', arguments)</span>
+  }
+&nbsp;
+  window.appendLoadStyleFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().proxyCallTo_('appendLoad', arguments)</span>
+  }
+&nbsp;
+  window.setStyleFixtures = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().proxyCallTo_('set', arguments)</span>
+  }
+&nbsp;
+  window.appendSetStyleFixtures = <span class="fstat-no" title="function not covered" >function (html) {</span>
+<span class="cstat-no" title="statement not covered" >    jasmine.getStyleFixtures().proxyCallTo_('appendSet', arguments)</span>
+  }
+&nbsp;
+  window.loadJSONFixtures = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.getJSONFixtures().proxyCallTo_('load', arguments)</span>
+  }
+&nbsp;
+  window.getJSONFixture = <span class="fstat-no" title="function not covered" >function (url) {</span>
+<span class="cstat-no" title="statement not covered" >    return jasmine.getJSONFixtures().proxyCallTo_('read', arguments)[url]</span>
+  }
+}));</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Mar 10 2016 21:06:14 GMT-0600 (CST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

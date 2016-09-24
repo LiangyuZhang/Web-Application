@@ -1,0 +1,73 @@
+
+    <div  ng-controller="ProfileController as profileCtrl">
+    <div class="modal-dialog" >
+
+      <!-- Modal content-->
+      <div class="modal-content">
+          <div class="container" style="padding-top: 60px;">
+            <h1 class="page-header">Edit Profile</h1>
+            <div class="row">
+              <!-- edit form column -->
+              <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
+
+                <h3>Personal info</h3>
+                <form class="form-horizontal" id="myModal" role="form">
+                  <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="text-center">
+                      <img ng-src="{{profileCtrl.avatar}}" class="user-avatar">
+                      <h6>Upload a new photo...</h6>
+                      <input type="file" accept="image/*" onchange="angular.element(this).scope().profileCtrl.changePic(this)">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Username:{{profileCtrl.username}}</label>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Zipcode:</label>
+                    <span id='profile-zipcode' class="col-lg-3 control-label">{{profileCtrl.zipcode}}</span>
+                    <div class="col-lg-8">
+                      <input class="form-control" ng-model="profileCtrl.newzipcode" type="text" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Email:</label>
+                    <span id='profile-email' class="col-lg-3 control-label">{{profileCtrl.email}}</span>
+                    <div class="col-lg-8">
+                      <input class="form-control" ng-model="profileCtrl.newemail" type="email" placeholder="example@domain.com" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-lg-3 control-label">Password:</label>
+                    <span id='profile-password' class="col-lg-3 control-label">{{profileCtrl.passwordstatus}}</span>
+                    <div class="col-lg-8">
+                      <input class="form-control" ng-model="profileCtrl.newpassword" required>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-8">
+                      <button type="button" class="btn btn-primary" ng-click="profileCtrl.updateProfile()">Save Changes</button>
+                      <span></span>
+                      <input class="btn btn-default" value="Cancel" type="reset">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" ng-click="profileCtrl.gotoMainPage()">Back to Main Page</button>
+        </div>
+      </div>
+      
+
+
+    </div>
+  </div>
+
+
+

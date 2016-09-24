@@ -1,0 +1,129 @@
+<div ng-controller="mainController as mainCtrl">
+<nav class="navbar-inverse navbar-fixed-top">
+  <div class='navigator'>
+      <a class="navbar-brand navbar-left">ZooTopia</a>
+      <div class="navbar-form navbar-right">
+        <form class="form-inline">
+          <input type="button" class="btn btn-success" ng-click="mainCtrl.logout()" value="Logout">
+          <button type="button" class="btn btn-success" ng-click="mainCtrl.gotoProfile()" >Profile</button>
+        </form>
+      </div>
+
+      <div class="searchbox">
+      <input id="searchfiled" type="text" placeholder="Search..." id="searchtext" ng-model="mainCtrl.searchKeyword">
+      </div> 
+
+
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+    <img ng-src="{{mainCtrl.avatar}}" class="user-avatar">
+    <div>{{mainCtrl.username}} </div>
+    <div id='status'>{{mainCtrl.status}} </div>
+    <div>
+      <textarea class="editStatus" rows="1" ng-model="mainCtrl.newStatus"></textarea>
+      <input type="button" class="editStatusBtn" ng-click="mainCtrl.editStatus()" value="Editstatus">
+    </div>
+    <div ng-controller="followingController as followCtrl">
+          <div>
+            <strong>Followers:</strong> 
+            <div>
+              <input class="form-control" ng-model="followCtrl.newFollower"><a class="glyphicon glyphicon-ok-circle" ng-click="followCtrl.addFollowing()" id='addFollowBtn'></a>
+              <div ng-hide="followCtrl.shownError">{{followCtrl.newFollowMsg}}</div>
+            </div>
+            <div ng-repeat="followingUser in followCtrl.followingUsers">
+              <div class="follower-content">
+                <div class="follower-profile">
+
+                  <img class="follower-avatar" ng-src="{{followingUser.avatar}}">
+                  <span>
+                    <a class="follower-name">{{followingUser.name}}</a>
+                    <p class="follower-status">{{followingUser.status}}</p>
+                  </span>
+                  <span class="glyphicon glyphicon-remove-circle" ng-click="followCtrl.deleteFollowing(followingUser.name)" id='deleteBtn'></span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+    </div>
+    </div>
+
+    <div class="input-group">
+      <input type="file" accept="image/*" onchange="angular.element(this).scope().mainCtrl.setFile(this)">
+      <textarea class="form-control" name="addpost" ng-model="mainCtrl.postContent"></textarea>
+      <span class="input-group-btn">
+      <input type="button" class="btn btn-secondary" ng-click="mainCtrl.addPost()" value="Post">
+      </span>
+    </div>
+    <div class="col-sm-9">
+        <div class="panel-default" ng-repeat="post in mainCtrl.posts | filter: mainCtrl.searchKeyword">
+
+          <div ng-controller="postController as postCtrl">
+          <div class="form-inline">
+            <div class="form-group">
+              <img ng-src="{{post.person.avatar}}" class="avatar">
+            </div>
+            <div class="form-group">
+              <div class="feed-name">{{post.person.name}}</div>
+              <div class="feed-timestamp">{{post.timestamp}}</div>
+            </div>
+        </div>
+          <span class="help-block"></span>
+          <div ng-if="post.img">
+          <img class="feed-img" ng-src="{{post.imageurl}}">
+          </div>
+          <div class="feed-content">{{post.content}}</div>
+          <div class="input-group">
+          <div class="col-sm-10">
+          <textarea class="form-control" ng-show="postCtrl.isEdit" ng-keydown="postCtrl.keydown($event, post)" ng-model="postCtrl.editPostContent"> </textarea>
+          </div>
+          <span class="input-group-btn">
+          <input type="button" class="btn btn-secondary" ng-show="post.person.name == mainCtrl.username && !postCtrl.isEdit" class="addpost-btn" ng-click="postCtrl.editPost(post.id, post.content)" value="Edit"></span>
+          </div>
+
+        </div>
+          <div class="feed-image-container" ng-if="post.imageurl != null && post.imageurl !='' " >
+            <img ng-src="{{post.imageurl}}" class="feed-image">
+          </div>
+
+          <span class="help-block"></span>
+
+          <div class="feed-replies">
+            <div class="a-reply" ng-repeat="reply in post.replies" ng-controller="replyController as replyCtrl">
+              <img ng-src="{{reply.person.avatar}}" class="reply-avatar">
+              <div class="replycontainer">
+                <div class="reply-info">
+                  <span class="name">{{reply.person.name}}</span>
+                  <span class="time">{{reply.timestamp}}</span>
+                </div>
+                <div class="text">{{reply.content}}</div>
+                <div class="input-group">
+                <div class="col-sm-10">
+                <textarea class="form-control"  ng-show="replyCtrl.isEdit" ng-keydown="replyCtrl.keydown($event, reply)" ng-model="replyCtrl.editReplyContent"> </textarea>
+                </div>
+                <span class="input-group-btn">
+                <input type="button" class="btn btn-secondary" ng-show="reply.person.name == mainCtrl.username && !replyCtrl.isEdit"  ng-click="replyCtrl.editReply(post.id, reply.id, reply.content)" value="Edit"></span>
+
+                </div>  
+              </div>
+            </div>
+          </div>
+
+          <span class="help-block"></span>
+          <div class="input-group" ng-init="replyContent=''">
+                  <textarea class="form-control" rows="2" ng-model="replyContent"></textarea>
+                  <span class="input-group-btn">
+                  <input type="button" class="btn btn-secondary"  ng-click="mainCtrl.addReply(post.id, replyContent)" value="Reply"></span>
+          </div>
+
+        </div>
+    </div>
+
+  </div>
+</div>
+
+</div>

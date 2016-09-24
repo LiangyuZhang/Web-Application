@@ -1,0 +1,63 @@
+<div ng-controller="loginController as loginCtrl">
+
+<nav class="navbar-inverse navbar-fixed-top">
+  <div class='navigator'>
+      <a class="navbar-brand navbar-left">ZooTopia</a>
+
+      <div class="navbar-form navbar-right">
+        <form class="form-inline">
+          <div class="form-group">
+            <input type="text" class="form-control" ng-model="loginCtrl.login_username" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control"  ng-model="loginCtrl.login_password" placeholder="Password">
+            <div class="alert-danger" ng-hide="!loginCtrl.errormsg">Password is not correct!</div>
+          </div>
+          <input type="button" class="btn btn-success" ng-click="loginCtrl.login()" value="Login">
+          <button> <a href='http://localhost:3000/auth/facebook'>Facebook </a> </button>
+        </form>
+      </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <Legend>Register!!</Legend>
+      
+      <form>
+        <div class="form-group">
+          <label>Username</label>
+          <input class="form-control" ng-model="loginCtrl.username" type="text" placeholder="Letters/Numbers" required>
+          <div class="alert-danger" ng-hide="!loginCtrl.nameerr">Account Name: Please input only letters and numbers!</div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input class="form-control" ng-model="loginCtrl.email" type="email" placeholder="example@domain.com" required>
+          <div class="alert-danger" ng-hide="!loginCtrl.emailerr">Invalid email address, example: 123@rice.edu</div>
+        </div>
+        <div class="form-group">
+          <label >Zipcode</label>
+          <input class="form-control" ng-model="loginCtrl.zipcode" type="text" required>
+          <div class="alert-danger" ng-hide="!loginCtrl.ziperr">Zipcode example: 77005 5digits</div>
+        </div>
+        <div class="form-group">
+          <label >Password</label>
+          <input class="form-control" ng-model="loginCtrl.password" type="password" required>
+        </div>
+        <div class="form-group">
+          <label >Password Confirmation</label>
+          <input class="form-control" ng-model="loginCtrl.passwordConfirm" type="password" required>
+          <div class="alert-danger" ng-hide="!loginCtrl.pwderr">Password should equal to confirmation field</div>
+        </div>
+        <div class="pull-right">
+          <input type="button" class="btn btn-primary" value="Register" id="register" ng-click="loginCtrl.isValid()">
+          <button type="reset" class="btn btn-warning">Clear!</button>
+          <div class="registerMsg" ng-hide="!loginCtrl.registerMsg">Successfully registered</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
